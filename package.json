@@ -1,0 +1,14 @@
+{
+  "name": "sesame-client",
+  "version": "1.0.0",
+  "description": "client for Sesame",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "qrohlf",
+  "license": "GPLv3",
+  "dependencies": {
+    "socket.io-client": "^1.1.0"
+  }
+}
