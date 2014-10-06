@@ -4,7 +4,7 @@
   "description": "client for Sesame",
   "main": "client.js",
   "scripts": {
-    "start": "coffee client.coffee",
+    "start": "node_modules/coffee-script/bin/coffee client.coffee",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "qrohlf",
