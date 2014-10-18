@@ -13,4 +13,5 @@ class Door
   status: ->
     return @beaglebone.readGarageDoorStatus()
 
-module.exports = Door
+module.exports = (beaglebone) ->
+  new Door(beaglebone)

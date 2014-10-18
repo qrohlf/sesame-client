@@ -1,28 +1,9 @@
-
-# beaglebone = require('./beaglebone')();
-# door = require('./door')(beaglebone);
-
-open_door = ->
-  socket.emit "door-status", "opening"
-  setTimeout (->
-    socket.emit "door-status", "opened"
-    return
-  ), 5000
-  return
-close_door = ->
-  socket.emit "door-status", "closing"
-  setTimeout (->
-    socket.emit "door-status", "closed"
-    return
-  ), 5000
-  return
-toggle_door = ->
-  if Math.random() > 0.5
-    open_door()
-  else
-    close_door()
-  return
-socket = require("socket.io-client")(process.env.SERVER_PATH or "http://localhost:3000")
+dotenv = require('dotenv')
+dotenv.load()
+require 'coffee-script/register'
+beaglebone = require('./beaglebone')
+door = require('./door')(beaglebone)
+socket = require("socket.io-client")("http://sesame-server.herokuapp.com")
 socket.on "connect", ->
   console.log "connected!"
   return
@@ -30,13 +11,15 @@ socket.on "connect", ->
 socket.on "door-command", (cmd) ->
   console.log "door-command " + cmd + " recieved"
   switch cmd
-    when "open"
-      open_door()
-    when "close"
-      close_door()
+    #when "open"
+      #open_door()
+    #when "close"
+      #close_door()
     when "toggle"
-      toggle_door()
-
+      socket.emit "log", "toggling door"
+      door.toggle()
+      socket.emit "door status", "toggled"
+  
 socket.on "disconnect", ->
   console.log "disconnected!"
   return
